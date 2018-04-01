@@ -4,7 +4,7 @@ function $(id) {
 }
 
 function test() {
-	xhr.get('../Dif',{},{}).then((data) => {
+	xhr.get('../cart',{},{}).then((data) => {
 		$('text').innerHTML = data.test;
 	});
 }

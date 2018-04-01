@@ -11,7 +11,8 @@ import org.apache.catalina.startup.Tomcat;
 
 public class Main {
 
-	static Client servlet = new Client();
+	static Show show = new Show();
+	static Add add = new Add();
 	
 	public static void main(String[] args) throws LifecycleException, ServletException {
 		
@@ -21,8 +22,10 @@ public class Main {
 		Context ctxt = tomcat.addContext("/", new File(".").getAbsolutePath());
 		tomcat.addWebapp("/App", new File(".").getAbsolutePath() + "/WebContent");
 		tomcat.enableNaming();
-		Tomcat.addServlet(ctxt, "Client", servlet);
-		ctxt.addServletMappingDecoded("/Dif", "Client");
+		Tomcat.addServlet(ctxt, "All", show);
+		ctxt.addServletMappingDecoded("/cart", "All");
+		Tomcat.addServlet(ctxt, "New", add);
+		ctxt.addServletMappingDecoded("/create", "New");
 		tomcat.start();
 		tomcat.getServer().await();
 		
