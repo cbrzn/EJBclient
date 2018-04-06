@@ -12,7 +12,6 @@ import org.apache.catalina.startup.Tomcat;
 public class Main {
 
 	static Show show = new Show();
-	static Add add = new Add();
 	
 	public static void main(String[] args) throws LifecycleException, ServletException {
 		
@@ -24,8 +23,6 @@ public class Main {
 		tomcat.enableNaming();
 		Tomcat.addServlet(ctxt, "All", show);
 		ctxt.addServletMappingDecoded("/cart", "All");
-		Tomcat.addServlet(ctxt, "New", add);
-		ctxt.addServletMappingDecoded("/create", "New");
 		tomcat.start();
 		tomcat.getServer().await();
 		

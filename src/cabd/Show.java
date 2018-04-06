@@ -22,7 +22,7 @@ public class Show extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		CartRemote bean = (CartRemote)request.getSession().getAttribute("test");
+		CartRemote bean = (CartRemote)request.getSession().getAttribute("id");
 		try {
 			if (bean == null) {
 				System.out.println("Client App Started");
@@ -36,12 +36,29 @@ public class Show extends HttpServlet {
 		        String interfaceName = CartRemote.class.getName();
 		        String name = "ejb:" + appName + "/" + moduleName + "/" +  distinctName    + "/" + beanName + "!" + interfaceName + "?stateful";
 		        bean = (CartRemote)context.lookup(name);		   
-		       	request.getSession().setAttribute("test", bean);
-		       	System.out.println(request.getSession().getAttribute("test"));
+		       	request.getSession().setAttribute("id", bean);
+		       	System.out.println(request.getSession().getAttribute("id"));
 			}
-	        ArrayList<String> msg = (ArrayList<String>) bean.getContents();
-	        System.out.println(msg);
-			out.print("{\"test\":\""+msg+"\"}");
+			
+			
+			String value = request.getParameter("value");
+			String title = request.getParameter("title");
+			if (value != null) {
+			    if (value.equals("1")) {
+			    	if (title != "") {
+			    		bean.addBook(request.getParameter("title"));
+			    		out.print("{\"test\":\"book added\"}");
+			    	} else {
+			    		out.print("{\"test\":\"name cannot be empty\"}");
+			    	}
+			    } else if (value.equals("2")) {
+					ArrayList<String> msg = (ArrayList<String>) bean.getContents();
+					out.print("{\"   test\":\""+msg+"\"}");
+				} else if (value.equals("3")) {
+			       	request.getSession().setAttribute("id", null);
+					out.print("{\"test\":\"session closed\"}");
+				}
+			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="/home/cesar/Documents/tomcat-embed-core-8.5.6.jar" sourcepath="/home/cesar/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.6/tomcat-embed-core-8.5.6-sources.jar"/>
 	<classpathentry kind="lib" path="/home/cesar/Documents/wildfly-10.1.0.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="lib" path="/home/cesar/Documents/ShopCart.jar"/>
+	<classpathentry kind="lib" path="/media/cesar/OS/Users/cesar/Documents/Proyectos Java/WEB2/json-20160810.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
