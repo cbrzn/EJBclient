@@ -3,24 +3,33 @@ function $(id) {
 	return document.getElementById(id);
 }
 
+function get_session() {
+	xhr.get('../cart',{},{}).then((data) => {
+		console.log(data);
+	})
+}
+
 function add() {
-	xhr.get('../cart',{value:$('add').value, title:$('title').value},{}).then((data) => {
+	xhr.post('../cart',{choice:$('add').value, title:$('title').value},{'Content-Type':'application/json'}).then((data) => {
 		$('text').innerHTML = data.test;
+		console.log(data);
 	});
 }
 
 function show() {
-	xhr.get('../cart',{value:$('show').value},{}).then((data) => {
+	xhr.post('../cart',{choice:$('show').value},{'Content-Type':'application/json'}).then((data) => {
 		$('text').innerHTML = data.test;
+		console.log(data);
 	});
 }
 
 function erase() {
-	xhr.get('../cart',{value:$('delete').value},{}).then((data) => {
+	xhr.post('../cart',{choice:$('delete').value},{'Content-Type':'application/json'}).then((data) => {
 		$('text').innerHTML = data.test;
 	});
 }
 
+addEventListener('load', get_session);
 $('add').addEventListener('click', add);
 $('show').addEventListener('click', show);
 $('delete').addEventListener('click', erase);
