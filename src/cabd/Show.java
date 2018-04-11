@@ -51,20 +51,24 @@ public class Show extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		JSONObject reqBody = new JSONObject(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+		JSONObject json = new JSONObject();
 		int choice = reqBody.getInt("choice");
 		switch (choice) {
 			case 1:
 				String title = reqBody.getString("title");
     			bean.addBook(title);
-    			out.print("{\"test\":\"book added\"}");
+    			json.put("test", "book added");
+    			out.print(json);
     	    break;
 			case 2:
 				ArrayList<String> msg = (ArrayList<String>) bean.getContents();
-				out.print("{\"test\":\""+msg+"\"}");
+    			json.put("test", msg);
+    			out.print(json);
 			break;
 			case 3:
 				bean = null;
-				out.print("{\"test\":\"session closed\"}");
+				json.put("test", "session closed");
+    			out.print(json);
 			break;
 		}
 	}
